@@ -8,6 +8,7 @@
 FROM debian:jessie
 MAINTAINER Timo Bürkelbach <timobuerkelbach@gmail.com>
 
+ENV FHEM_VERSION 5.8
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM xterm
 
@@ -92,12 +93,11 @@ RUN pip install --upgrade pip \
 
 WORKDIR /opt
 # install fhem (debian paket)
-RUN wget https://debian.fhem.de/fhem.deb
-RUN dpkg -i fhem.deb
+RUN wget https://fhem.de/fhem-${FHEM_VERSION}.deb && dpkg -i fhem-${FHEM_VERSION}.deb
 # RUN rm fhem.deb
 RUN echo 'fhem    ALL = NOPASSWD:ALL' >>/etc/sudoers
 RUN echo 'attr global pidfilename /var/run/fhem/fhem.pid' >> /opt/fhem/fhem.cfg
-RUN echo 'define Wetter_Villach Weather 540859 1800 de'   >> /opt/fhem/fhem.cfg
+#RUN echo 'define Wetter_Villach Weather 540859 1800 de'   >> /opt/fhem/fhem.cfg
 
 RUN apt-get -y --force-yes install supervisor 
 RUN mkdir -p /var/log/supervisor
