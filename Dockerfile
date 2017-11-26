@@ -69,9 +69,9 @@ RUN cpan install Net::Telnet
 
 
 # whatsapp Python yowsup
-#RUN apt-get -y --force-yes install python-soappy python-dateutil python-pip python-dev build-essential libgmp10 && apt-get clean
+RUN apt-get -y --force-yes install python-soappy python-dateutil python-pip python-dev build-essential libgmp10 && apt-get clean
 # whatsapp images
-#RUN apt-get -y --force-yes install libtiff5-dev libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk && apt-get clean
+RUN apt-get -y --force-yes install libtiff5-dev libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk && apt-get clean
 
 
 # Pyhton stuff
