@@ -29,6 +29,8 @@ liberror-perl \
 libfile-copy-recursive-perl \
 libfile-fcntllock-perl \
 libio-socket-ip-perl \
+libio-socket-multicast-perl \
+libio-socket-ssl-perl \
 libjson-perl \
 libjson-xs-perl \
 libmail-sendmail-perl \
@@ -37,21 +39,39 @@ libswitch-perl \
 libsys-hostname-long-perl \
 libterm-readkey-perl \
 libterm-readline-perl-perl \
-libsnmp-perl \
-libnet-telnet-perl \
-libmime-lite-perl \
 libxml-simple-perl \
-libdigest-crc-perl \
-libcrypt-cbc-perl \
-libio-socket-timeout-perl \
-libmime-lite-perl \
-libdevice-serialport-perl && apt-get clean
+libcrypt-pbkdf2-perl \
+libcpan-meta-yaml-perl \
+libdigest-md5-file-perl \
+liblwp-protocol-https-perl \
+liblwp-protocol-http-socketunix-perl \
+libwww-perl \
+libsoap-lite-perl \
+libxml-parser-lite-perl \
+libnet-upnp-perl \
+libimage-librsvg-perl \
+libgd-graph-perl \
+libcrypt-rijndael-perl \
+libnet-address-ip-local-perl \
+libio-interface-perl \
+libgd-text-perl \
+samba \
+samba-common-bin \
+build-essential && apt-get clean
+
+RUN cpan install Net::MQTT:Simple
+RUN cpan install JSON
+RUN cpan install Data::Dumper
+RUN cpan install MIME::Base64
+RUN cpan install Date::Parse
+RUN cpan install Data::UUID
+RUN cpan install Net::Telnet 
 
 
 # whatsapp Python yowsup
-RUN apt-get -y --force-yes install python-soappy python-dateutil python-pip python-dev build-essential libgmp10 && apt-get clean
+#RUN apt-get -y --force-yes install python-soappy python-dateutil python-pip python-dev build-essential libgmp10 && apt-get clean
 # whatsapp images
-RUN apt-get -y --force-yes install libtiff5-dev libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk && apt-get clean
+#RUN apt-get -y --force-yes install libtiff5-dev libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk && apt-get clean
 
 
 # Pyhton stuff
@@ -60,14 +80,14 @@ RUN pip install --upgrade pip \
  && pip install pillow --upgrade
 
 
-RUN pip install yowsup2 --upgrade
+#RUN pip install yowsup2 --upgrade
 
 
 # install yowsup-client
-WORKDIR /opt
-RUN mkdir /opt/yowsup-config
-RUN wget -N https://github.com/tgalal/yowsup/archive/master.zip
-RUN unzip -o master.zip && rm master.zip
+#WORKDIR /opt
+#RUN mkdir /opt/yowsup-config
+#RUN wget -N https://github.com/tgalal/yowsup/archive/master.zip
+#RUN unzip -o master.zip && rm master.zip
 
 
 WORKDIR /opt
@@ -118,7 +138,7 @@ ENV RUNVAR fhem
 WORKDIR /root
 
 # SSH / Fhem ports 
-EXPOSE 2222 7072 8083 8084 8085 9001
+EXPOSE 2222 7072 8083 8084 8085 8086 8087 9001
 
 ADD run.sh /root/
 ADD runfhem.sh /root/
@@ -135,6 +155,6 @@ ENTRYPOINT ["./run.sh"]
 #CMD ["arg1"]
 
 # last add volumes
-VOLUME /opt/fhem   /opt/yowsup-config
+VOLUME /opt/fhem   #/opt/yowsup-config
 
 # End Dockerfile
