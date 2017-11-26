@@ -6,7 +6,7 @@
 # * added service sshd  to supervisord
 
 FROM debian:jessie
-MAINTAINER Armin Pipp <armin@pipp.at>
+MAINTAINER Timo Bürkelbach <timobuerkelbach@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM xterm
