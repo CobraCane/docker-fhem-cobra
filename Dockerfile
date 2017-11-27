@@ -150,9 +150,9 @@ ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN mkdir /_cfg  
 ADD volumedata2.sh /_cfg/
 RUN chmod +x /root/run.sh  && chmod +x /_cfg/*.sh
-RUN /_cfg/volumedata2.sh create /opt/fhem \
- && /_cfg/volumedata2.sh create /opt/yowsup-config \
- && touch /opt/yowsup-config/empty.txt
+RUN /_cfg/volumedata2.sh create /opt/fhem
+# && /_cfg/volumedata2.sh create /opt/yowsup-config \
+# && touch /opt/yowsup-config/empty.txt
 
 ENTRYPOINT ["./run.sh"]
 #CMD ["arg1"]
