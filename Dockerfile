@@ -111,6 +111,7 @@ RUN echo '[SonosSpeak] comment = Audio-Files for SonosPlayer to Speak' >>/etc/sa
 RUN echo 'read only = false' >>/etc/samba/smb.conf
 RUN echo 'path = /mnt/SonosSpeak' >>/etc/samba/smb.conf
 RUN echo 'guest ok = yes' >>/etc/samba/smb.conf
+RUN /etc/init.d/samba restart
 
 
 # Do some stuff
