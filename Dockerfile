@@ -93,7 +93,8 @@ RUN pip install --upgrade pip \
 
 WORKDIR /opt
 # install fhem (debian paket)
-RUN wget http://fhem.de/fhem-5.8.deb && dpkg -i fhem-5.8.deb
+RUN wget https://fhem.de/fhem-5.8.deb
+RUN dpkg -i fhem-5.8.deb
 # RUN rm fhem.deb
 RUN echo 'fhem    ALL = NOPASSWD:ALL' >>/etc/sudoers
 RUN echo 'attr global pidfilename /var/run/fhem/fhem.pid' >> /opt/fhem/fhem.cfg
