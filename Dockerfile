@@ -105,6 +105,13 @@ RUN echo 'attr global pidfilename /var/run/fhem/fhem.pid' >> /opt/fhem/fhem.cfg
 RUN apt-get -y --force-yes install supervisor 
 RUN mkdir -p /var/log/supervisor
 
+#SambaDatei für Sonos
+RUN touch /etc/samba/smb.conf
+RUN echo '[SonosSpeak] comment = Audio-Files for SonosPlayer to Speak' >>/etc/samba/smb.conf
+RUN echo 'read only = false' >>/etc/samba/smb.conf
+RUN echo 'path = /mnt/SonosSpeak' >>/etc/samba/smb.conf
+RUN echo 'guest ok = yes' >>/etc/samba/smb.conf
+
 
 # Do some stuff
 RUN echo Europe/Vienna > /etc/timezone && dpkg-reconfigure tzdata  \
